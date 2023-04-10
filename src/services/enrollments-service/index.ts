@@ -4,9 +4,9 @@ import { invalidDataError, notFoundError } from '@/errors';
 import addressRepository, { CreateAddressParams } from '@/repositories/address-repository';
 import enrollmentRepository, { CreateEnrollmentParams } from '@/repositories/enrollment-repository';
 import { exclude } from '@/utils/prisma-utils';
-import { ViaCepResponse } from '@/protocols';
+import { ViaCepResponse, ViaCEPAdress } from '@/protocols';
 
-async function getAddressFromCEP(CEP: string) {
+async function getAddressFromCEP(CEP: string): Promise<ViaCEPAdress> {
   const result = await request.get(`${process.env.VIA_CEP_API}/${CEP}/json/`);
 
   if (!result.data || result.data.erro) {
