@@ -3,25 +3,21 @@ export type ApplicationError = {
   message: string;
 };
 
-export type ViaCepResponse = {
-  cep: string;
+export type ViaCEPAddress = {
   logradouro: string;
   complemento: string;
   bairro: string;
   localidade: string;
   uf: string;
-  ibge: string;
-  gia: string;
-  ddd: string;
-  siafi: string;
 };
 
-export type ViaCEPAdress = {
+export type AddressEnrollment = {
   logradouro: string;
   complemento: string;
   bairro: string;
   cidade: string;
   uf: string;
+  error?: string;
 };
 
 export type RequestError = {
@@ -30,4 +26,15 @@ export type RequestError = {
   statusText: string;
   name: string;
   message: string;
+};
+
+export type Payment = {
+  ticketId: number;
+  cardData: {
+    issuer: string;
+    number: number;
+    name: string;
+    expirationDate: Date;
+    cvv: number;
+  };
 };
