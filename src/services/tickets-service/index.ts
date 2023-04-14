@@ -22,6 +22,19 @@ async function getTicketTypeById(id: number) {
   return ticketType;
 }
 
+async function updateTicketById(ticketId: number) {
+  const updatePayment = await ticketsRepository.updateTicketById(ticketId);
+
+  return updatePayment;
+}
+
+async function getTicketById(id: number) {
+  const ticket = await ticketsRepository.findTicketById(id);
+  if (!ticket) throw notFoundError();
+
+  return ticket;
+}
+
 async function createTicket(ticketTypeId: number, enrollmentId: number) {
   const ticket = await ticketsRepository.createTicket(ticketTypeId, enrollmentId);
   return ticket;
@@ -32,6 +45,8 @@ const ticketsService = {
   getUserTickets,
   getTicketTypeById,
   createTicket,
+  getTicketById,
+  updateTicketById,
 };
 
 export default ticketsService;
