@@ -25,8 +25,7 @@ export async function validatePayment(req: AuthenticatedRequest, res: Response) 
   const { userId } = req;
   let lastNumbers = '' + cardData.number;
   lastNumbers = lastNumbers.slice(-4);
-  if (!ticketId || !cardData.issuer || !cardData.number || !cardData.name || !cardData.expirationDate || !cardData.cvv)
-    return res.sendStatus(400);
+
   try {
     const ticket = await ticketsService.getTicketById(Number(ticketId));
     const ticketType = await ticketsService.getTicketTypeById(ticket.ticketTypeId);

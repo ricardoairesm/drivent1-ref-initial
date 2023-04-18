@@ -5,9 +5,9 @@ export const createPaymentSchema = Joi.object<Payment>({
   ticketId: Joi.number().required(),
   cardData: {
     issuer: Joi.string().required(),
-    number: Joi.number().required(),
+    number: Joi.string().required(),
     name: Joi.string().required(),
-    expirationDate: Joi.date().required(),
-    cvv: Joi.number().required(),
+    expirationDate: Joi.string().required(),
+    cvv: Joi.string().required(),
   },
 });
