@@ -14,7 +14,7 @@ export async function getAllHotels(req: AuthenticatedRequest, res: Response) {
     const ticketType = await ticketsService.getTicketTypeById(ticket.ticketTypeId);
     if (ticket.status != 'PAID' || ticketType.isRemote === true || ticketType.includesHotel === false)
       return res.sendStatus(402);
-    if (hotels.length <= 1) return res.sendStatus(404);
+    if (hotels.length < 1) return res.sendStatus(404);
     return res.status(httpStatus.OK).send(hotels);
   } catch (error) {
     return res.status(httpStatus.NOT_FOUND).send(error);
