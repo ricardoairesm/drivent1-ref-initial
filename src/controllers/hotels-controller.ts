@@ -17,7 +17,7 @@ export async function getAllHotels(req: AuthenticatedRequest, res: Response) {
     if (!hotels) return res.sendStatus(404);
     return res.status(httpStatus.OK).send(hotels);
   } catch (error) {
-    return res.sendStatus(httpStatus.NO_CONTENT);
+    return res.sendStatus(404);
   }
 }
 
