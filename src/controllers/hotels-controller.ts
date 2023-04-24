@@ -23,7 +23,7 @@ export async function getAllHotels(req: AuthenticatedRequest, res: Response) {
 
 export async function getHotelById(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  const hotelId = req.params as Record<string, string>;
+  const hotelId = req.params.hotelId as string;
   try {
     const hotels = await hotelsService.getHotelById(Number(hotelId));
     const enrollment = await enrollmentsService.getOneWithAddressByUserId(userId);
