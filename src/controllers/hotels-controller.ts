@@ -10,12 +10,10 @@ export async function getAllHotels(req: AuthenticatedRequest, res: Response) {
   try {
     const hotels = await hotelsService.getHotels();
     const enrollment = await enrollmentsService.getOneWithAddressByUserId(userId);
-    const { createdAt, enrollmentId, id, status, ticketTypeId, updatedAt } = await ticketsService.getUserTickets(
-      enrollment.id,
-    );
+    const ticket = await ticketsService.getUserTickets(enrollment.id);
     if (!enrollment) return res.sendStatus(404);
-    if (!id) return res.sendStatus(404);
-    if (status != 'PAID') return res.sendStatus(402);
+    if (!ticket) return res.sendStatus(404);
+    if (ticket.status != 'PAID') return res.sendStatus(402);
     if (!hotels) return res.sendStatus(404);
     return res.status(httpStatus.OK).send(hotels);
   } catch (error) {
