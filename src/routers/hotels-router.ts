@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authenticateToken, validateBody } from '@/middlewares';
+import { authenticateToken } from '@/middlewares';
 import { getAllHotels, getHotelById } from '@/controllers/hotels-controller';
 
 const hotelsRouter = Router();
