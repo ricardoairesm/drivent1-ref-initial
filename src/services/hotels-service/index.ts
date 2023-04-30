@@ -1,7 +1,4 @@
-import { Ticket } from '@prisma/client';
 import { notFoundError } from '@/errors';
-import ticketsRepository from '@/repositories/tickets-repository';
-import { TicketType } from '@/protocols';
 import hotelsRepository from '@/repositories/hotels-repository';
 
 async function getHotels() {
