@@ -9,6 +9,9 @@ async function findUserTickets(enrollmentId: number) {
     where: {
       enrollmentId: enrollmentId,
     },
+    include: {
+      TicketType: true,
+    },
   });
 }
 async function findTicketById(id: number) {
