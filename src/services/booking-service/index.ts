@@ -1,6 +1,5 @@
-import { notFoundError } from '@/errors';
-import { cannotListHotelsError } from '@/errors/cannot-list-hotels-error';
-import bookingsRepository from '@/repositories/bookings-repository';
+import { cannotListHotelsError, notFoundError } from '@/errors';
+import bookingsRepository from '@/repositories/booking-repository';
 import enrollmentRepository from '@/repositories/enrollment-repository';
 import roomsRepository from '@/repositories/rooms-repository';
 import ticketsRepository from '@/repositories/tickets-repository';

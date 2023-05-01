@@ -1,7 +1,7 @@
 import { NextFunction, Response } from 'express';
 import httpStatus from 'http-status';
 import { AuthenticatedRequest } from '@/middlewares';
-import bookingsService from '@/services/bookings-service';
+import bookingsService from '@/services/booking-service';
 
 export async function getUserBookings(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const { userId } = req;
@@ -20,6 +20,6 @@ export async function createBooking(req: AuthenticatedRequest, res: Response, ne
     const booking = await bookingsService.createBooking(Number(userId), Number(roomId));
     return res.status(httpStatus.OK).send(booking);
   } catch (error) {
-    return res.status(403).send(error);
+    next(error);
   }
 }
