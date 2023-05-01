@@ -1,8 +1,13 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status';
 import { ApplicationError } from '@/protocols';
 
-export function handleApplicationErrors(err: ApplicationError | Error, _req: Request, res: Response) {
+export function handleApplicationErrors(
+  err: ApplicationError | Error,
+  _req: Request,
+  res: Response,
+  _next: NextFunction,
+) {
   if (err.name === 'CannotEnrollBeforeStartDateError') {
     return res.status(httpStatus.BAD_REQUEST).send({
       message: err.message,
@@ -28,7 +33,7 @@ export function handleApplicationErrors(err: ApplicationError | Error, _req: Req
   }
 
   if (err.name === 'NotFoundError') {
-    return res.status(httpStatus.NOT_FOUND).send({
+    return res.status(httpStatus.FORBIDDEN).send({
       message: err.message,
     });
   }
