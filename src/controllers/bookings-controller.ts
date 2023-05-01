@@ -20,6 +20,6 @@ export async function createBooking(req: AuthenticatedRequest, res: Response, ne
     const booking = await bookingsService.createBooking(Number(userId), Number(roomId));
     return res.status(httpStatus.OK).send(booking);
   } catch (error) {
-    return res.status(httpStatus.NOT_FOUND).send(error);
+    return res.status(403).send(error);
   }
 }
