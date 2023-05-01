@@ -16,7 +16,8 @@ async function createBooking(userId: number, roomId: number) {
   if (!room) {
     throw notFoundError();
   }
-  if (room.capacity === 0) throw notFoundError();
+  const ocupiedSpots = await bookingsRepository.findRoomsOcupiedSpots(roomId);
+  if (room.capacity === ocupiedSpots) throw notFoundError();
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
   if (!enrollment) {
     throw notFoundError();
