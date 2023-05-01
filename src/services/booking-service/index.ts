@@ -17,7 +17,9 @@ async function createBooking(userId: number, roomId: number) {
     throw notFoundError();
   }
   const ocupiedSpots = await bookingsRepository.findRoomsOcupiedSpots(roomId);
-  if (room.capacity === ocupiedSpots) throw cannotListHotelsError();
+  if (room.capacity === ocupiedSpots) {
+    throw cannotListHotelsError();
+  }
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
   if (!enrollment) {
     throw cannotListHotelsError();
@@ -33,9 +35,28 @@ async function createBooking(userId: number, roomId: number) {
   return { bookingId: booking.id };
 }
 
+async function updateUsersBooking(userId: number, roomId: number) {
+  const room = await roomsRepository.findRoomWithId(roomId);
+  if (!room) {
+    throw notFoundError();
+  }
+  const booking = await bookingsRepository.findUserBookings(userId);
+  if (!booking) {
+    throw cannotListHotelsError();
+  }
+  const ocupiedSpots = await bookingsRepository.findRoomsOcupiedSpots(roomId);
+  if (room.capacity === ocupiedSpots) {
+    throw cannotListHotelsError();
+  }
+  const newBooking = await bookingsRepository.updateBooking(booking.id, roomId);
+
+  return { bookingId: booking.id };
+}
+
 const bookingsService = {
   getUserBookings,
   createBooking,
+  updateUsersBooking,
 };
 
 export default bookingsService;
