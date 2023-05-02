@@ -5,10 +5,13 @@ import roomsRepository from '@/repositories/rooms-repository';
 import ticketsRepository from '@/repositories/tickets-repository';
 
 async function getUserBookings(userId: number) {
-  const bookings = await bookingsRepository.findUserBookings(userId);
-  if (!bookings) throw notFoundError();
+  const booking = await bookingsRepository.findUserBookings(userId);
+  if (!booking) throw notFoundError();
 
-  return bookings;
+  return {
+    id: booking.id,
+    Room: booking.Room,
+  };
 }
 
 async function createBooking(userId: number, roomId: number) {
